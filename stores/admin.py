@@ -7,6 +7,6 @@ class StoreAdmin(admin.ModelAdmin):
     list_display = ("name","owner","description","is_active")
     list_editable = ("is_active",)
     list_filter = ("is_active",)
-    fieldsets = (("اطلاعات اصلی",{"fields":("name","owner","description")}),)
+    fieldsets = (("Basic information",{"fields":("name","owner","description")}),)
 
 admin.site.register(Store,StoreAdmin)
