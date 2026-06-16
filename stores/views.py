@@ -13,4 +13,5 @@ def stores_list(request):
 
 def store_detail(request,pk):
     store = get_object_or_404(Store, pk=pk)
-    return render(request, 'stores/store_detail.html',{'store':store})
+    products = store.products.filter(is_active=True , stock__gt=0)
+    return render(request, 'stores/store_detail.html',{'products':products})
