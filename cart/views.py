@@ -13,7 +13,7 @@ def cart(request):
         try:
             product = Product.objects.get(id=int(product_id))
             products.append({
-               http://127.0.0.1:8000/ 'product': product,
+               'product': product,
                 'quantity': quantity,
                 'total': product.price * quantity
             })
