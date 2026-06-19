@@ -12,5 +12,3 @@ class SignUpForm(UserCreationForm):
               if User.objects.filter(email=email).exists():
                      raise forms.ValidationError('The email is not accurate use another one.')
               return email
-class LoginForm(AuthenticationForm):
-       pass
