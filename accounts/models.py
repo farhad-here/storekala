@@ -37,7 +37,8 @@ class User(AbstractBaseUser, PermissionsMixin):
        username = models.CharField(max_length=50, unique=True)
        is_active = models.BooleanField(default=True)
        is_staff = models.BooleanField(default=False)
-
+       is_seller = models.BooleanField(default=False)
+       
        objects = CustomUserManager()
        USERNAME_FIELD = 'email'        
        REQUIRED_FIELDS = ['username']  

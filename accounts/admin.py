@@ -5,19 +5,20 @@ from .models import User
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['email', 'username', 'is_staff', 'is_active']
-    list_filter = ['is_staff', 'is_active']
+    list_display = ['email', 'username', 'is_seller', 'is_staff', 'is_active']
+    list_filter = ['is_seller', 'is_staff', 'is_active']
+    list_editable = ['is_seller', 'is_staff', 'is_active']  # ← مستقیم از لیست تغییر بده
     search_fields = ['email', 'username']
     ordering = ['email']
 
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Permissions', {'fields': ('is_seller', 'is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'password1', 'password2', 'is_staff', 'is_active'),
+            'fields': ('email', 'username', 'password1', 'password2', 'is_seller', 'is_staff', 'is_active'),
         }),
     )

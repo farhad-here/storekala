@@ -1,4 +1,5 @@
 from django import forms
+from .models import Store
 from .models import Product
 
 class AddProductForm(forms.ModelForm):
@@ -27,10 +28,16 @@ class AddProductForm(forms.ModelForm):
     
     def clean_image(self):
         image = self.cleaned_data.get('image')
-        if image:
+        if image and hasattr(image, 'content_type'):
             if image.size > 5 * 1024 * 1024:
                 raise forms.ValidationError('حجم تصویر نباید بیشتر از ۵ مگابایت باشد.')
             
             if not image.content_type.startswith('image/'):
                 raise forms.ValidationError('فایل باید تصویر باشد.')
         return image
+
+# seller_panel
+class StoreForm(forms.ModelForm):
+    class Meta:
+        model = Store
+        fields = ['name', 'description']

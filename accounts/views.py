@@ -9,13 +9,14 @@ def signup_view(request):
 
     form = SignUpForm(request.POST or None)
     if form.is_valid():
-        user = form.save()
+        user = form.save(commit=False)
+        user.is_seller = form.cleaned_data.get('is_seller', False)
+        user.save()
         user.backend = 'accounts.backends.EmailOrUsernameBackend'
         login(request, user)
         return redirect('homepage')
 
     return render(request, 'registration/signup.html', {'form': form})
-
 
 def login_view(request):
     if request.user.is_authenticated:
