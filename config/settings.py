@@ -30,8 +30,10 @@ ALLOWED_HOSTS = []
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'homepage'
 LOGOUT_REDIRECT_URL = 'homepage'
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailOrUsernameBackend',
+]
 # Application definition
 
 INSTALLED_APPS = [

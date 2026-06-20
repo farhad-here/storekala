@@ -8,4 +8,4 @@ class HomePageView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.select_related('store').order_by('-created_at')
+        return Product.objects.select_related('store').filter(is_active=True, store__is_active=True).order_by('-created_at')
