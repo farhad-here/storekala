@@ -15,3 +15,10 @@ class SignUpForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('The email is not accurate use another one.')
         return email
+class IncreaseBalanceForm(forms.Form):
+       amount = forms.DecimalField(
+       min_value=1000,
+       max_digits=10,
+       decimal_places=0,
+       label='Amount'
+    )

@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block title %}Order History | DijiKala{% endblock %}
+{% block content %}
+
+<h2>📜 Order History</h2>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="order-card">
+            <div class="order-header">
+                <strong>Order #{{ order.id }}</strong>
+                <span>{{ order.created_at|date:"Y/m/d H:i" }}</span>
+                <span class="badge">{{ order.status }}</span>
+                <strong>{{ order.total }} تومان</strong>
+            </div>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.price }} تومان</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.subtotal }} تومان</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No orders yet. <a href="/">Start Shopping</a></p>
+{% endif %}
+
+{% endblock %}

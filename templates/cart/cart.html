@@ -1,9 +1,7 @@
 {% extends 'base/base.html' %}
 {% block title %}Cart | DijiKala{% endblock %}
-
 {% block content %}
 <h2>🛒 Your Cart</h2>
-
 {% if cart_items %}
     <table class="cart-table">
         <thead>
@@ -12,6 +10,7 @@
                 <th>Store</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Subtotal</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -20,17 +19,18 @@
                 <tr>
                     <td>{{ item.product.name }}</td>
                     <td>{{ item.product.store.name }}</td>
-                    <td>${{ item.product.price }}</td>
+                    <td>{{ item.product.price }} تومان</td>
                     <td>{{ item.quantity }}</td>
-                    <td><a href="{% url 'remove_from_cart' product_id=item.product.id %}">❌</a></td>
+                    <td>{{ item.total }} تومان</td>
+                    <td>
+                        <a href="{% url 'remove_from_cart' item.product.id %}">❌</a>  {# ← product_id= حذف شد #}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <p><strong>Total:</strong> ${{ total_price }}</p>
-    <a href="#" class="btn">✅ Checkout</a>
-
+    <p><strong>Total:</strong> {{ total_price }} تومان</p>
+    <a href="{% url 'checkout' %}" class="btn">✅ Checkout</a>  {# ← # به checkout تغییر کرد #}
 {% else %}
     <p>Your cart is empty.</p>
 {% endif %}

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class CustomUserManager(BaseUserManager):
        def _create_user(self, email, username, password=None, **extra_fields):
@@ -38,10 +40,27 @@ class User(AbstractBaseUser, PermissionsMixin):
        is_active = models.BooleanField(default=True)
        is_staff = models.BooleanField(default=False)
        is_seller = models.BooleanField(default=False)
-       
+
        objects = CustomUserManager()
        USERNAME_FIELD = 'email'        
        REQUIRED_FIELDS = ['username']  
 
        def __str__(self):
               return self.email
+
+      
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    phone = models.CharField(max_length=11, blank=True, null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+
+    def __str__(self):
+        return f"{self.user.username} Profile"
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()

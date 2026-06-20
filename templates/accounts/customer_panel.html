@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% block title %}My Panel | DijiKala{% endblock %}
+{% block content %}
+
+<h2>👤 Customer Panel</h2>
+
+<div class="card" style="max-width: 400px;">
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone|default:"Not set" }}</p>
+    <p><strong>ID:</strong> #{{ request.user.id }}</p>
+    <p><strong>Balance:</strong> {{ profile.balance }} تومان</p>
+</div>
+
+<div style="max-width: 400px; margin-top: 20px;">
+    <h3>💳 Increase Balance</h3>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Amount (تومان)</label>
+            {{ form.amount }}
+            {{ form.amount.errors }}
+        </div>
+        <button type="submit" class="btn">Add Balance</button>
+    </form>
+</div>
+
+<div style="margin-top: 20px;">
+    <a href="{% url 'cart' %}" class="btn">🛒 View Cart ({{ cart_count }} items)</a>
+    <a href="{% url 'order_history' %}" class="btn">📜 Order History</a>
+</div>
+
+{% endblock %}

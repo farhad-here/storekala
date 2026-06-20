@@ -84,11 +84,9 @@ class CreateStoreView(CreateView):
         self.request.user.is_seller = True
         self.request.user.save()
         return response
-# manage_store
 @login_required
 def manage_store(request, pk):
     store = get_object_or_404(Store, pk=pk)
-
     if store.owner != request.user:
         raise PermissionDenied
     
@@ -98,7 +96,6 @@ def manage_store(request, pk):
     if request.method == 'POST':
         action = request.POST.get('action')
         
-      
         if action == 'update_store':
             store_form = StoreForm(request.POST, instance=store)
             if store_form.is_valid():
@@ -112,13 +109,21 @@ def manage_store(request, pk):
             product.delete()
             messages.success(request, 'Product deleted.')
             return redirect('manage_store', pk=pk)
+
+        elif action == 'update_stock':  # ← اضافه کن
+            product_id = request.POST.get('product_id')
+            new_stock = request.POST.get('stock')
+            product = get_object_or_404(Product, id=product_id, store=store)
+            product.stock = int(new_stock)
+            product.save()
+            messages.success(request, f'Stock updated for {product.name}.')
+            return redirect('manage_store', pk=pk)
     
     return render(request, 'stores/manage_store.html', {
         'store': store,
         'products': products,
         'store_form': store_form,
     })
-
 
 @login_required
 def edit_product(request, product_id):
