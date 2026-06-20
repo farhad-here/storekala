@@ -1,10 +1,8 @@
 {% extends 'base/base.html' %}
 {% block title %}Checkout | DijiKala{% endblock %}
 {% block content %}
-
 <div class="checkout-container">
     <h2>🧾 Checkout</h2>
-
     <table class="cart-table">
         <thead>
             <tr>
@@ -27,20 +25,22 @@
     </table>
 
     <div class="checkout-summary">
-        <p><strong>Total:</strong> {{ total }} تومان</p>
-        <p><strong>Your Balance:</strong> {{ balance }} تومان</p>
-        {% if balance >= total %}
+        <div class="row"><strong>Total:</strong> <span class="val">{{ total_price }} تومان</span></div>
+        <div class="row"><strong>Your Balance:</strong> <span>{{ balance }} تومان</span></div>
+        <hr class="divider">
+
+        {% if has_balance %}
             <p style="color:green;">✅ Sufficient balance</p>
             <form method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn">✅ Confirm Order</button>
             </form>
         {% else %}
-            <p style="color:red;">❌ Insufficient balance (need {{ total|add:"-"|add:balance }} more)</p>
+            <p style="color:red;">❌ Insufficient balance — {{ shortage }} تومان کمبود</p>
             <a href="{% url 'customer_panel' %}" class="btn">💳 Increase Balance</a>
         {% endif %}
-        <a href="{% url 'cart' %}" class="btn-link">← Back to Cart</a>
+
+        <a href="{% url 'cart' %}" class="btn-gray btn" style="margin-top:8px;">← Back to Cart</a>
     </div>
 </div>
-
 {% endblock %}

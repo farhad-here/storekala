@@ -102,6 +102,8 @@ def checkout(request):
         'items': items,
         'total_price': total_price,
         'balance': profile.balance,
+        'has_balance': profile.balance >= total_price,
+        'shortage': total_price - profile.balance,
     })
 
 
