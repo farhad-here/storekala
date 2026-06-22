@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, IncreaseBalanceForm
+from .forms import SignUpForm, IncreaseBalanceForm, PaymentForm
 from .models import User, Profile 
 from django.contrib import messages
 
@@ -20,6 +20,7 @@ def signup_view(request):
         return redirect('homepage')
 
     return render(request, 'registration/signup.html', {'form': form})
+
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -40,6 +41,7 @@ def logout_view(request):
               return render(request, 'registration/logged_out.html')
        return redirect('homepage')
 
+
 @login_required
 def customer_panel(request):
        profile, created = Profile.objects.get_or_create(user=request.user)
@@ -59,3 +61,24 @@ def customer_panel(request):
            'form': form,
            'cart_count': sum(cart.values()),
        })
+
+
+@login_required
+def payment_view(request):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['final_amount']
+            profile.balance += amount
+            profile.save()
+            messages.success(request, f'✅ {amount:,} تومان با موفقیت به حساب شما اضافه شد.')
+            return redirect('customer_panel')
+    else:
+        form = PaymentForm()
+
+    return render(request, 'accounts/payment.html', {
+        'form': form,
+        'profile': profile,
+    })

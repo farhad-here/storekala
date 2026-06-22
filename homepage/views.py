@@ -20,7 +20,7 @@ class HomePageView(ListView):
 
         category_slug = self.request.GET.get('category')
         if category_slug:
-            queryset = queryset.filter(category__slug=category_slug)
+            queryset = queryset.filter(category__slug=category_slug, stock__gt=0)
 
         return queryset.order_by('-created_at')
 
