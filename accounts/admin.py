@@ -7,7 +7,7 @@ class CustomUserAdmin(UserAdmin):
     model = User
     list_display = ['email', 'username', 'is_seller', 'is_staff', 'is_active']
     list_filter = ['is_seller', 'is_staff', 'is_active']
-    list_editable = ['is_seller', 'is_staff', 'is_active']  # ← مستقیم از لیست تغییر بده
+    list_editable = ['is_seller', 'is_staff', 'is_active']
     search_fields = ['email', 'username']
     ordering = ['email']
 
