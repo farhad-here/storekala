@@ -5,7 +5,7 @@ class StoreAdmin(admin.ModelAdmin):
     list_display = ("name", "owner", "description", "is_active",)
     list_editable = ("is_active",)
     list_filter = ("is_active",)
-    search_fields = ['name', 'owner__email']
+    search_fields = ['name', 'owner__phone']
     list_filter = ['created_at']
     fieldsets = (("Basic information",{"fields":("name","owner","description")}),)
 
@@ -27,7 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'total', 'status', 'created_at']
     list_filter = ['status', 'created_at']
-    search_fields = ['user__email']
+    search_fields = ['user__phone']
     list_editable = ['status']
 
 @admin.register(OrderItem)

@@ -2,29 +2,42 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User, Profile
 
+# Register your models here.
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['email', 'username', 'is_seller', 'is_staff', 'is_active']
+    list_display = ['last_name','phone', 'is_seller', 'is_staff', 'is_active']
     list_filter = ['is_seller', 'is_staff', 'is_active']
     list_editable = ['is_seller', 'is_staff', 'is_active']  # ← مستقیم از لیست تغییر بده
-    search_fields = ['email', 'username']
-    ordering = ['email']
+    search_fields = ['phone','last_name']
+    ordering = ['-created_at']
+
 
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'password')}),
-        ('Permissions', {'fields': ('is_seller', 'is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
+        (None, {"fields": ("phone", "password")}),
+        (("Personal info"), {"fields": ("first_name", "last_name")}),
+        (
+            ("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+            },
+        )
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'password1', 'password2', 'is_seller', 'is_staff', 'is_active'),
+            'fields': ('first_name', 'last_name','phone', 'password1', 'password2', 'is_seller', 'is_staff', 'is_active'),
         }),
     )
 
-    
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone', 'balance']
-    search_fields = ['user__email', 'user__username']
+    list_display = ['user', 'balance']
+    search_fields = ['user__last_name', 'user__phone']

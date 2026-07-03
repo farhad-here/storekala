@@ -7,14 +7,15 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'password1', 'password2', 'is_seller']
+        fields = ['phone','first_name','last_name', 'password1', 'password2', 'is_seller']
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
         User = get_user_model()
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('The email is not accurate use another one.')
-        return email
+        if User.objects.filter(phone=phone).exists():
+            raise forms.ValidationError('The phone is not accurate use another one.')
+        return phone
+
 class IncreaseBalanceForm(forms.Form):
        amount = forms.DecimalField(
        min_value=1000,
@@ -48,3 +49,39 @@ class PaymentForm(forms.Form):
         else:
             cleaned_data['final_amount'] = int(cleaned_data.get('amount', 0))
         return cleaned_data
+    
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label='شماره تلفن',
+        max_length=11,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'شماره تلفن خود را وارد کنید'
+        })
+    )
+    
+    def clean(self):
+        phone_number = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if phone_number is not None and password:
+            # احراز هویت با شماره تلفن
+            self.user_cache = authenticate(
+                self.request, 
+                username=phone_number, 
+                password=password
+            )
+            
+            if self.user_cache is None:
+                raise forms.ValidationError(
+                    'شماره تلفن یا رمز عبور اشتباه است',
+                    code='invalid_login',
+                )
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
