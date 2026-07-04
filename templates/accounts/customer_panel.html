@@ -5,9 +5,8 @@
 <h2>👤 Customer Panel</h2>
 
 <div class="card" style="max-width: 400px;">
-    <p><strong>Username:</strong> {{ request.user.username }}</p>
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
-    <p><strong>Phone:</strong> {{ profile.phone|default:"Not set" }}</p>
+    <p><strong>Fullname:</strong> {{ request.user }}</p>
+    <p><strong>Phone:</strong> {{ request.user.phone}}</p>
     <p><strong>ID:</strong> #{{ request.user.id }}</p>
     <p><strong>Balance:</strong> {{ profile.balance }} تومان</p>
 </div>
