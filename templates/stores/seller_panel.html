@@ -9,9 +9,9 @@
 <div class="card-grid" style="margin-top: 20px;">
     {% for store in stores %}
         <div class="card">
-            <h3>{{ store.name }}</h3>
-            <p>{{ store.description|truncatewords:15 }}</p>
-            <a href="{% url 'manage_store' store.id %}" class="btn">Manage Store</a>        </div>
+            <h3 style="margin-top: 7px; background-color: aquamarine;padding: 5px 20px;border-radius: 10px;">{{ store.name }}</h3>
+            <p style="padding: 5px; text-align: center;">{{ store.description|truncatewords:15 }}</p>
+            <a href="{% url 'manage_store' store.id %}" class="btn" style="height: 35px;">Manage Store</a>        </div>
     {% empty %}
         <p>You have no stores yet.</p>
     {% endfor %}

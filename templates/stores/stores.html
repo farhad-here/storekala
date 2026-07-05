@@ -5,10 +5,10 @@
 <h2>🏪 All Stores</h2>
 <div class="card-grid">
     {% for store in stores %}
-        <div class="card">
-            <h3>{{ store.name }}</h3>
-            <p>{{ store.description|truncatewords:15 }}</p>
-            <a href="{% url 'store_detail' store.pk %}" class="btn">Visit Store</a>
+        <div class="card" style="gap: 30px;">
+            <h3 style="margin-top: 7px;background-color: antiquewhite;padding: 5px 15px 5px 15px; border-radius: 10px;">{{ store.name }}</h3>
+            <p style="padding: 5px; text-align: center;">{{ store.description|truncatewords:15 }}</p>
+            <a href="{% url 'store_detail' store.pk %}" class="btn" style="height: 30px;">Visit Store</a>
         </div>
     {% empty %}
         <p>No stores available.</p>

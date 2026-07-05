@@ -3,50 +3,52 @@
 {% block title %}Sign Up | DijiKala{% endblock %}
 
 {% block content %}
-<h2>🧾 Create Account</h2>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;gap: 30px;">
+    <h2>🧾 Create Account</h2>
 
-<form method="post" class="auth-form">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="form-group">
-        <label style="display: flex; flex-direction: row-reverse; height: 30px;"> 
-            {{ form.is_seller }}
-            <span style="width: 200px; color: firebrick;">I want to be a seller</span>
-        </label>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label style="display: flex; flex-direction: row-reverse; height: 30px;justify-content: center;align-items: center; background-color: orange; border-radius: 10px;padding: 20px;"> 
+                {{ form.is_seller }}
+                <span style="width: 200px; color: rgb(66, 66, 66);">I want account as a seller</span>
+            </label>
 
-        {{ form.is_seller.errors }}
-    </div>
+            {{ form.is_seller.errors }}
+        </div>
 
-    <div class="form-group">
-        <label for="id_username">Phone Number</label>
-        {{ form.phone }}
-        {{ form.phone.errors}}
-    </div>
-    <div class="form-group">
-        <label for="id_email">First Name</label>
-        {{ form.first_name }}
-        {{form.first_name.errors}}
-    </div>
-    <div class="form-group">
-        <label for="id_email">Last Name</label>
-        {{ form.last_name }}
-        {{form.last_name.errors}}
-    </div>
-    <div class="form-group">
-        <label for="id_password1">Password</label>
-        {{ form.password1 }}
-        {{form.password1.errors}}
-    </div>
-    <div class="form-group">
-        <label for="id_password2">Confirm Password</label>
-        {{ form.password2 }}
-        {{form.password2.errors}}
-    </div>
+        <div class="form-group">
+            <label for="id_username">Phone Number</label>
+            {{ form.phone }}
+            {{ form.phone.errors}}
+        </div>
+        <div class="form-group">
+            <label for="id_email">First Name</label>
+            {{ form.first_name }}
+            {{form.first_name.errors}}
+        </div>
+        <div class="form-group">
+            <label for="id_email">Last Name</label>
+            {{ form.last_name }}
+            {{form.last_name.errors}}
+        </div>
+        <div class="form-group">
+            <label for="id_password1">Password</label>
+            {{ form.password1 }}
+            {{form.password1.errors}}
+        </div>
+        <div class="form-group">
+            <label for="id_password2">Confirm Password</label>
+            {{ form.password2 }}
+            {{form.password2.errors}}
+        </div>
 
-    <button type="submit" class="btn">Sign Up</button>
+        <button type="submit" class="btn">Sign Up</button>
 
-    <p class="auth-link">Already have an account? 
-        <a href="{% url 'login' %}">Login</a>
-    </p>
-</form>
+        <p class="auth-link">Already have an account? 
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+    </form>
+</div>
 {% endblock %}

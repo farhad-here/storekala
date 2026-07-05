@@ -3,7 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
 class SignUpForm(UserCreationForm):
-    is_seller = forms.BooleanField(required=False, label='I want to be a Seller')
+    is_seller = forms.BooleanField(required=False, label='I want to be a Seller', widget=forms.CheckboxInput(attrs={
+        'class': 'seller-checkbox',
+        'style': 'width:20px;height:20px;accent-color:firebrick;'
+    }))
 
     class Meta:
         model = get_user_model()

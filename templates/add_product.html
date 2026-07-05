@@ -71,7 +71,9 @@
         box-shadow: 0 30px 80px rgba(0,0,0,0.2);
         animation: scaleUp 0.5s ease-out;
     }
-    
+    .form-item input, .form-item textarea, .form-item select{
+            padding: 12px 10px !important;
+    }
     @keyframes scaleUp {
         from {
             opacity: 0;
@@ -231,7 +233,6 @@
         transform: translateY(-2px);
     }
     
-    /* ریسپانسیو */
     @media (max-width: 600px) {
         .form-grid {
             grid-template-columns: 1fr;
