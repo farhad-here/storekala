@@ -11,7 +11,9 @@ class HomePageView(ListView):
     def get_queryset(self):
         queryset = Product.objects.select_related('store', 'category').filter(
             is_active=True,
-            store__is_active=True
+            store__is_active=True,
+            stock__gt=0
+            
         )
 
         query = self.request.GET.get('q')
