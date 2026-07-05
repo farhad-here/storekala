@@ -122,14 +122,15 @@ main.container {
     align-items: center;
     justify-content: center;
     gap: 6px;
+    margin:10px 5px 10px 5px;
     background: var(--red);
     color: var(--white);
-    padding: 9px 20px;
+    padding: 5px 10px !important;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem !important;
     font-weight: 600;
     transition: background var(--t), transform var(--t);
     white-space: nowrap;
@@ -207,7 +208,7 @@ main.container {
 .out-of-stock   { background: var(--gray-100); color: var(--gray-400); }
 
 /* ====== SEARCH BAR ====== */
-.search-bar {
+.search-form {
     display: flex;
     align-items: center;
     background: var(--gray-50);
@@ -219,9 +220,9 @@ main.container {
     transition: border-color var(--t);
 }
 
-.search-bar:focus-within { border-color: var(--red); }
+.search-form:focus-within { border-color: var(--red); }
 
-.search-bar input {
+.search-form input {
     flex: 1;
     border: none;
     background: transparent;
@@ -232,7 +233,7 @@ main.container {
     color: var(--gray-800);
 }
 
-.search-bar button {
+.search-form button {
     background: var(--red);
     color: var(--white);
     border: none;
@@ -244,7 +245,7 @@ main.container {
     transition: background var(--t);
 }
 
-.search-bar button:hover { background: var(--red-dark); }
+.search-form button:hover { background: var(--red-dark); }
 
 /* ====== CATEGORIES ====== */
 .categories {
@@ -310,17 +311,17 @@ main.container {
     overflow: hidden;
     transition: transform var(--t), box-shadow var(--t), border-color var(--t);
     display: flex;
+    gap: 5px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     cursor: pointer;
 }
+.card a{
+    text-decoration: none;
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--gray-300);
 }
+
 
 .card img {
     width: 100%;
@@ -382,6 +383,7 @@ main.container {
 }
 
 /* ====== STORE CARDS ====== */
+
 .stores-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

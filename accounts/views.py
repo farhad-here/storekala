@@ -45,15 +45,21 @@ def logout_view(request):
 @login_required
 def customer_panel(request):
        profile, created = Profile.objects.get_or_create(user=request.user)
-       cart = request.session.get('cart', {})    
+       cart = request.session.get('cart', {})   
+       
        if request.method == 'POST':
-           form = IncreaseBalanceForm(request.POST)
-           if form.is_valid():
-               amount = form.cleaned_data['amount']
-               profile.balance += amount
-               profile.save()
-               messages.success(request, f'{amount} تومان به موجودی اضافه شد.')
-               return redirect('customer_panel')
+            form = IncreaseBalanceForm(request.POST)
+            print(profile.balance)
+            if form.is_valid():
+                amount = form.cleaned_data['amount']
+                if amount <= 9999999999 and profile.balance <= 9999999999 and profile.balance+amount <= 9999999999:
+                    profile.balance += amount
+                    profile.save()
+                    messages.success(request, f'{amount} تومان به موجودی اضافه شد.')
+                    return redirect('customer_panel')
+                else:
+                    messages.warning(request, message='Amount is alot or balance is full')
+                    return redirect('customer_panel')
        else:
            form = IncreaseBalanceForm()   
        return render(request, 'accounts/customer_panel.html', {
@@ -71,10 +77,15 @@ def payment_view(request):
         form = PaymentForm(request.POST)
         if form.is_valid():
             amount = form.cleaned_data['final_amount']
-            profile.balance += amount
-            profile.save()
-            messages.success(request, f'✅ {amount:,} تومان با موفقیت به حساب شما اضافه شد.')
-            return redirect('customer_panel')
+            if amount <= 9999999999 and profile.balance <= 9999999999 and profile.balance+amount <= 9999999999:
+
+                profile.balance += amount
+                profile.save()
+                messages.success(request, f'✅ {amount:,} تومان با موفقیت به حساب شما اضافه شد.')
+                return redirect('customer_panel')
+            else:
+                messages.warning(request, 'Amount is alot or balance is full')
+                return redirect('customer_panel')
     else:
         form = PaymentForm()
 

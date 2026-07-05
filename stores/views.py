@@ -30,11 +30,12 @@ def add_to_cart(request,product_id):
         if product.stock > cart[product_key]:
             cart[product_key]+= 1
         else:
-            messages.error(request,"Not enough stock")
+            messages.error(request,message="Not enough stock")
 
     else:
         cart[product_key]= 1
-
+        messages.success(request, 'Added to cart successfully.')
+        
     request.session['cart'] = cart
     return redirect(request.META.get('HTTP_REFERER', '/'))
 

@@ -23,14 +23,14 @@
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.total }} تومان</td>
                     <td>
-                        <a href="{% url 'remove_from_cart' item.product.id %}">❌</a>  {# ← product_id= حذف شد #}
+                        <a href="{% url 'remove_from_cart' item.product.id %}">❌</a>  
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     <p><strong>Total:</strong> {{ total_price }} تومان</p>
-    <a href="{% url 'checkout' %}" class="btn">✅ Checkout</a>  {# ← # به checkout تغییر کرد #}
+    <a href="{% url 'checkout' %}" class="btn">✅ Checkout</a>
 {% else %}
     <p>Your cart is empty.</p>
 {% endif %}
