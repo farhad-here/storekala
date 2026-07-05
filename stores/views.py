@@ -21,6 +21,8 @@ def store_detail(request,pk):
     store = get_object_or_404(Store, pk=pk)
     products = store.products.filter(is_active=True , stock__gt=0)
     return render(request, 'stores/store_detail.html',{'products':products, 'store':store})
+
+
 def add_to_cart(request,product_id):
     product = get_object_or_404(Product,id=product_id)
     cart = request.session.get('cart',{})
@@ -35,7 +37,7 @@ def add_to_cart(request,product_id):
     else:
         cart[product_key]= 1
         messages.success(request, 'Added to cart successfully.')
-        
+
     request.session['cart'] = cart
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -85,6 +87,8 @@ class CreateStoreView(CreateView):
         self.request.user.is_seller = True
         self.request.user.save()
         return response
+    
+
 @login_required
 def manage_store(request, pk):
     store = get_object_or_404(Store, pk=pk)
@@ -125,6 +129,7 @@ def manage_store(request, pk):
         'products': products,
         'store_form': store_form,
     })
+
 
 @login_required
 def edit_product(request, product_id):
