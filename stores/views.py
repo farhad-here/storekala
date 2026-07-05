@@ -31,6 +31,8 @@ def add_to_cart(request,product_id):
     if product_key in cart:
         if product.stock > cart[product_key]:
             cart[product_key]+= 1
+            messages.success(request, 'Added to cart successfully.')
+
         else:
             messages.error(request,message="Not enough stock")
 
