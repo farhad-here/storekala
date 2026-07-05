@@ -9,9 +9,9 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="form-group">
-        <label> 
+        <label style="display: flex; flex-direction: row-reverse; height: 30px;"> 
             {{ form.is_seller }}
-            I want to be a seller
+            <span style="width: 200px; color: firebrick;">I want to be a seller</span>
         </label>
 
         {{ form.is_seller.errors }}

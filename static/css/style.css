@@ -125,7 +125,7 @@ main.container {
     margin:10px 5px 10px 5px;
     background: var(--red);
     color: var(--white);
-    padding: 5px 10px !important;
+    padding: 10px 10px !important;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
