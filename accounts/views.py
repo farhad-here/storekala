@@ -49,7 +49,6 @@ def customer_panel(request):
        
        if request.method == 'POST':
             form = IncreaseBalanceForm(request.POST)
-            print(profile.balance)
             if form.is_valid():
                 amount = form.cleaned_data['amount']
                 if amount <= 9999999999 and profile.balance <= 9999999999 and profile.balance+amount <= 9999999999:
