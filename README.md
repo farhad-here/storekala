@@ -25,6 +25,9 @@ A multi-role e-commerce web application built with Django, where sellers can cre
 * Product descriptions and pricing
 * Store-specific product catalog
 * Products displayed by newest first
+* Product Categories
+* Product Search
+* Product Images Upload
 
 ### 🛍️ Shopping Experience
 
@@ -33,6 +36,7 @@ A multi-role e-commerce web application built with Django, where sellers can cre
 * Add products to cart
 * Remove products from cart
 * Cart quantity management
+* Inventory Management
 
 ### 💳 Demo Payment System
 
@@ -77,17 +81,17 @@ A multi-role e-commerce web application built with Django, where sellers can cre
 
 ## 📄 Pages
 
-| URL                 | Description                       |
-| ------------------- | --------------------------------- |
-| `/`                 | Landing page with latest products |
-| `/stores/`          | List of all stores                |
-| `/stores/<id>/`     | Store details and products        |
-| `/seller/`          | Seller dashboard                  |
-| `/customer/`        | Customer dashboard                |
-| `/cart/`            | Shopping cart                     |
-| `/payment/`         | Wallet top-up page                |
-| `/accounts/login/`  | Login page                        |
-| `/accounts/signup/` | Registration page                 |
+| URL                 | Description                       | VIEW
+| ------------------- | --------------------------------- | ---------------------------------
+| `/`                 | Landing page with latest products | class HomePageView - get_queryset -> GET
+| `/stores/`          | List of all stores                | stores_list -> GET
+| `/stores/<id>/`     | Store details and products        | store_detail -> GET
+| `/seller/`          | Seller dashboard                  | class SellerPanelView - get_queryset -> GET
+| `/customer/`        | Customer dashboard                | customer_panel -> GET
+| `/cart/`            | Shopping cart                     | cart -> GET
+| `/payment/`         | Wallet top-up page                | payment_view -> POST
+| `/accounts/login/`  | Login page                        | signup_view -> POST
+| `/accounts/signup/` | Registration page                 | login_view -> POST
 
 ---
 
@@ -175,8 +179,8 @@ Price
 * SQLite
 * HTML5
 * CSS3
-* Bootstrap (if used)
 * Django Templates
+* JS
 
 ---
 
@@ -249,24 +253,34 @@ python manage.py runserver
 Add screenshots of:
 
 * Landing Page
+  <img width="2042" height="941" alt="digi1" src="https://github.com/user-attachments/assets/6219c760-f9bc-435c-ad69-46e5ef63d7f2" />
+
 * Store Detail Page
+  <img width="1436" height="687" alt="digi7" src="https://github.com/user-attachments/assets/e30c0bac-9332-468c-bab8-2e93f7935732" />
+
+  
 * Seller Dashboard
+  <img width="1783" height="430" alt="digi6" src="https://github.com/user-attachments/assets/f398ac06-bbf1-4dc3-8254-2d464401538a" />
+
+  
 * Customer Dashboard
+  <img width="1928" height="791" alt="digi" src="https://github.com/user-attachments/assets/f65af08d-a176-4dbe-aac9-e0be0a93406c" />
+
+  
 * Cart Page
+  <img width="1768" height="489" alt="digi2" src="https://github.com/user-attachments/assets/fb1b10c7-0b33-4000-bd9b-84419c609b32" />
+
+  
 * Payment Page
+  <img width="1850" height="561" alt="digi3" src="https://github.com/user-attachments/assets/d734a8cd-8825-478c-b7f9-40dfcbc4255b" />
+  <img width="1830" height="750" alt="digi4" src="https://github.com/user-attachments/assets/1a555b64-e386-4c05-9ba2-2d8db89b1493" />
 
----
+* signup and login
+  <img width="2042" height="941" alt="digi1" src="https://github.com/user-attachments/assets/42d00b91-a314-400f-b10a-c5393b70fede" />
+  <img width="2054" height="946" alt="digi2" src="https://github.com/user-attachments/assets/14a0ac0c-71d2-47b6-b525-7ff166fc2b49" />
 
-## 🎯 Optional Enhancements
 
-* Product Search
-* Product Categories
-* Product Images Upload
-* Inventory Management
-* Thank You Page
-* Real Payment Gateway Integration
-* Product Reviews & Ratings
-* REST API with Django REST Framework
+
 
 ---
 
