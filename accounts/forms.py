@@ -72,7 +72,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         password = self.cleaned_data.get('password')
 
         if phone_number is not None and password:
-            # احراز هویت با شماره تلفن
+
             self.user_cache = authenticate(
                 self.request, 
                 username=phone_number, 
