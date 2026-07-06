@@ -120,10 +120,21 @@ def manage_store(request, pk):
         elif action == 'update_stock':  # ← اضافه کن
             product_id = request.POST.get('product_id')
             new_stock = request.POST.get('stock')
-            product = get_object_or_404(Product, id=product_id, store=store)
-            product.stock = int(new_stock)
-            product.save()
-            messages.success(request, f'Stock updated for {product.name}.')
+            try:
+                new_stock = int(new_stock)
+
+                # حداکثر مقدار قابل قبول
+                if new_stock < 0:
+                    raise ValueError("Stock cannot be negative.")
+
+                if new_stock > 1000000:   # یا هر مقداری که برای پروژه مناسب است
+                    raise ValueError("Stock is too large.")
+                product = get_object_or_404(Product, id=product_id, store=store)
+                product.stock = new_stock
+                product.save()
+                messages.success(request, f'Stock updated for {product.name}.')
+            except ValueError as e:
+                messages.error(request, str(e))
             return redirect('manage_store', pk=pk)
     
     return render(request, 'stores/manage_store.html', {
