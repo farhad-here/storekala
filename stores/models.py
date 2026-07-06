@@ -33,7 +33,7 @@ class Category(models.Model):
         return self.name
     
 class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')  # ← اضافه کن
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     name = models.CharField(max_length=200,verbose_name="Name")
     price = models.DecimalField(max_digits=10,decimal_places=0,verbose_name="Price")
     description = models.TextField(blank=True, null=True,verbose_name="Descriptions")
@@ -76,7 +76,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=0)  # قیمت موقع خرید
+    price = models.DecimalField(max_digits=10, decimal_places=0)
 
     def __str__(self):
         return f"{self.product.name} x{self.quantity}"
