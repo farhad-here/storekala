@@ -89,9 +89,9 @@ A multi-role e-commerce web application built with Django, where sellers can cre
 | `/seller/`          | Seller dashboard                  | class SellerPanelView - get_queryset -> GET
 | `/customer/`        | Customer dashboard                | customer_panel -> GET
 | `/cart/`            | Shopping cart                     | cart -> GET
-| `/payment/`         | Wallet top-up page                | payment_view -> POST
-| `/accounts/login/`  | Login page                        | signup_view -> POST
-| `/accounts/signup/` | Registration page                 | login_view -> POST
+| `/payment/`         | Wallet top-up page                | payment_view -> GET , form.is_valid -> POST
+| `/accounts/login/`  | Login page                        | login_view -> GET , form.is_valid -> POST
+| `/accounts/signup/` | Registration page                 | signup_view -> GET , form.is_valid -> POST
 
 ---
 
