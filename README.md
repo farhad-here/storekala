@@ -189,7 +189,7 @@ Price
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/django-online-shop.git
+git clone https://github.com/farhad-here/storekala.git
 cd django-online-shop
 ```
 
