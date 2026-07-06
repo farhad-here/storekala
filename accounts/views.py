@@ -15,7 +15,6 @@ def signup_view(request):
         user = form.save(commit=False)
         user.is_seller = form.cleaned_data.get('is_seller', False)
         user.save()
-        user.backend = 'accounts.backends.UsernameBackend'
         login(request, user)
         return redirect('homepage')
 
