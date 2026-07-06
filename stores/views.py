@@ -117,17 +117,17 @@ def manage_store(request, pk):
             messages.success(request, 'Product deleted.')
             return redirect('manage_store', pk=pk)
 
-        elif action == 'update_stock':  # ← اضافه کن
+        elif action == 'update_stock':  
             product_id = request.POST.get('product_id')
             new_stock = request.POST.get('stock')
             try:
                 new_stock = int(new_stock)
 
-                # حداکثر مقدار قابل قبول
+                
                 if new_stock < 0:
                     raise ValueError("Stock cannot be negative.")
 
-                if new_stock > 1000000:   # یا هر مقداری که برای پروژه مناسب است
+                if new_stock > 1000000:   
                     raise ValueError("Stock is too large.")
                 product = get_object_or_404(Product, id=product_id, store=store)
                 product.stock = new_stock
