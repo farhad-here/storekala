@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
+
 
 class SignUpForm(UserCreationForm):
     is_seller = forms.BooleanField(required=False, label='I want to be a Seller', widget=forms.CheckboxInput(attrs={
@@ -54,8 +57,7 @@ class PaymentForm(forms.Form):
         return cleaned_data
     
 
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate
+
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
@@ -72,7 +74,11 @@ class CustomAuthenticationForm(AuthenticationForm):
         password = self.cleaned_data.get('password')
 
         if phone_number is not None and password:
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> testing
             self.user_cache = authenticate(
                 self.request, 
                 username=phone_number, 
